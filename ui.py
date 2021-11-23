@@ -7,6 +7,8 @@ from PyQt5.QtWidgets import (
     QGroupBox
 )
 
+from image_processing.controller import load_img, color_separation, color_transformation, blending
+
 class Window(QWidget):
     def __init__(self):
         super().__init__()
@@ -14,19 +16,24 @@ class Window(QWidget):
 
         layout = QHBoxLayout()
         
-        layout.addWidget(self.image_processing())
-        layout.addWidget(self.image_smoothing())
-        layout.addWidget(self.edge_detection())
-        layout.addWidget(self.transforms())
+        layout.addWidget(self.q1())
+        layout.addWidget(self.q2())
+        layout.addWidget(self.q3())
+        layout.addWidget(self.q4())
 
         self.setLayout(layout)
 
-    def image_processing(self):
+    def q1(self):
         groupbox = QGroupBox("Image Processing")
         load_img_btn = QPushButton('1.1 Load Image')
         color_separation_btn = QPushButton('1.2 Color Separation')
         color_transformation_btn = QPushButton('1.3 Color Transformation')
         blending_btn = QPushButton('1.4 Blending')
+
+        load_img_btn.clicked.connect(load_img)
+        color_separation_btn.clicked.connect(color_separation)
+        color_transformation_btn.clicked.connect(color_transformation)
+        blending_btn.clicked.connect(blending)
 
         v_layout = QVBoxLayout()
         groupbox.setLayout(v_layout)
@@ -38,7 +45,7 @@ class Window(QWidget):
 
         return groupbox
 
-    def image_smoothing(self):
+    def q2(self):
         groupbox = QGroupBox("Image Smoothing")
         gaussian_blur_btn = QPushButton('2.1 Gaussian Blur')
         bilateral_filter_btn = QPushButton('2.2 Bilateral Filter')
@@ -53,7 +60,7 @@ class Window(QWidget):
 
         return groupbox
 
-    def edge_detection(self):
+    def q3(self):
         groupbox = QGroupBox("Edge Detection")
         gaussian_blur_btn = QPushButton('3.1 Gaussian Blur')
         sobel_x_btn = QPushButton('3.2 Sobel X')
@@ -70,7 +77,7 @@ class Window(QWidget):
 
         return groupbox
     
-    def transforms(self):
+    def q4(self):
         groupbox = QGroupBox("Transformation")
         resize_btn = QPushButton('4.1 Resize')
         translation_btn = QPushButton('4.2 Translation')
