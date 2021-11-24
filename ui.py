@@ -6,8 +6,17 @@ from PyQt5.QtWidgets import (
     QWidget,
     QGroupBox
 )
-
-from image_processing.controller import load_img, color_separation, color_transformation, blending
+from image_processing import (
+    load_img, 
+    color_separation, 
+    color_transformation, 
+    blending
+)
+from image_smoothing import (
+    gaussian_blur,
+    bilateral_filter,
+    median_filter
+)
 
 class Window(QWidget):
     def __init__(self):
@@ -50,6 +59,10 @@ class Window(QWidget):
         gaussian_blur_btn = QPushButton('2.1 Gaussian Blur')
         bilateral_filter_btn = QPushButton('2.2 Bilateral Filter')
         median_filter_btn = QPushButton('2.3 Median Filter')
+
+        gaussian_blur_btn.clicked.connect(gaussian_blur)
+        bilateral_filter_btn.clicked.connect(bilateral_filter)
+        median_filter_btn.clicked.connect(median_filter)
 
         v_layout = QVBoxLayout()
         groupbox.setLayout(v_layout)
