@@ -17,6 +17,11 @@ from image_smoothing import (
     bilateral_filter,
     median_filter
 )
+from edge_detection import (
+    my_gaussian_blur,
+    sobel,
+    magnitude
+)
 
 class Window(QWidget):
     def __init__(self):
@@ -79,6 +84,11 @@ class Window(QWidget):
         sobel_x_btn = QPushButton('3.2 Sobel X')
         sobel_y_btn = QPushButton('3.3 Sobel Y')
         magnitude_btn = QPushButton('3.4 Magnitude')
+
+        gaussian_blur_btn.clicked.connect(my_gaussian_blur)
+        sobel_x_btn.clicked.connect(sobel)
+        sobel_y_btn.clicked.connect(lambda: sobel(1))
+        magnitude_btn.clicked.connect(magnitude)
 
         v_layout = QVBoxLayout()
         groupbox.setLayout(v_layout)
