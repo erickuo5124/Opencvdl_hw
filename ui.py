@@ -22,6 +22,12 @@ from edge_detection import (
     sobel,
     magnitude
 )
+from transforms import (
+    resize,
+    translation,
+    rotation_scaling,
+    shearing
+)
 
 class Window(QWidget):
     def __init__(self):
@@ -106,6 +112,11 @@ class Window(QWidget):
         translation_btn = QPushButton('4.2 Translation')
         rotation_scaling_btn = QPushButton('4.3 Rotation, Scaling')
         shearing_btn = QPushButton('4.4 Shearing')
+
+        resize_btn.clicked.connect(resize)
+        translation_btn.clicked.connect(translation)
+        rotation_scaling_btn.clicked.connect(rotation_scaling)
+        shearing_btn.clicked.connect(shearing)
 
         v_layout = QVBoxLayout()
         groupbox.setLayout(v_layout)
