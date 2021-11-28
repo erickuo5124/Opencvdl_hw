@@ -4,8 +4,10 @@ from PyQt5.QtWidgets import (
     QVBoxLayout,
     QPushButton,
     QWidget,
-    QGroupBox
+    QGroupBox,
+    QLineEdit
 )
+from PyQt5.QtGui import QIntValidator
 from image_processing import (
     load_img, 
     color_separation, 
@@ -28,6 +30,14 @@ from transforms import (
     rotation_scaling,
     shearing
 )
+from vgg16 import (
+    show_img,
+    show_hyperparameter,
+    show_shortcut,
+    show_accuracy,
+    test,
+    input_changed
+)
 
 class Window(QWidget):
     def __init__(self):
@@ -40,6 +50,7 @@ class Window(QWidget):
         layout.addWidget(self.q2())
         layout.addWidget(self.q3())
         layout.addWidget(self.q4())
+        layout.addWidget(self.q5())
 
         self.setLayout(layout)
 
@@ -125,5 +136,34 @@ class Window(QWidget):
         v_layout.addWidget(translation_btn)
         v_layout.addWidget(rotation_scaling_btn)
         v_layout.addWidget(shearing_btn)
+
+        return groupbox
+
+    def q5(self):
+        groupbox = QGroupBox("VGG16 TEST")
+        show_img_btn = QPushButton('5.1 Show Train Images')
+        hyperpara_btn = QPushButton('5.2 Show HyperParameter')
+        shortcut_btn = QPushButton('5.3 Show Model Shortcut')
+        accuracy_btn = QPushButton('5.4 Show Accuracy')
+        number_input = QLineEdit()
+        number_input.setValidator(QIntValidator())
+        test_btn = QPushButton('5.5 Test')
+
+        show_img_btn.clicked.connect(show_img)
+        hyperpara_btn.clicked.connect(show_hyperparameter)
+        shortcut_btn.clicked.connect(show_shortcut)
+        accuracy_btn.clicked.connect(show_accuracy)
+        number_input.textChanged.connect(input_changed)
+        test_btn.clicked.connect(test)
+
+        v_layout = QVBoxLayout()
+        groupbox.setLayout(v_layout)
+
+        v_layout.addWidget(show_img_btn)
+        v_layout.addWidget(hyperpara_btn)
+        v_layout.addWidget(shortcut_btn)
+        v_layout.addWidget(accuracy_btn)
+        v_layout.addWidget(number_input)
+        v_layout.addWidget(test_btn)
 
         return groupbox
