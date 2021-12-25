@@ -9,6 +9,13 @@ from PyQt5.QtWidgets import (
   QLabel
 )
 from PyQt5.QtGui import QIntValidator
+from camera_calibration import (
+    corner_detection,
+    find_intrinsic,
+    find_extrinsic,
+    find_distortion,
+    show_result
+)
 
 class Window(QWidget):
   def __init__(self):
@@ -41,6 +48,12 @@ class Window(QWidget):
 
     find_distortion_btn = QPushButton('2.4 Find Distortion')
     show_result_btn = QPushButton('2.5 Show Result')
+
+    find_corners_btn.clicked.connect(corner_detection)
+    find_intrinsic_btn.clicked.connect(find_intrinsic)
+    find_extrinsic_btn.clicked.connect(find_extrinsic)
+    find_distortion_btn.clicked.connect(find_distortion)
+    show_result_btn.clicked.connect(show_result)
 
     groupbox = QGroupBox("Calibration")
     v_layout = QVBoxLayout()
