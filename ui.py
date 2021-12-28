@@ -10,6 +10,7 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtGui import QIntValidator
 from camera_calibration import (
+    input_changed,
     corner_detection,
     find_intrinsic,
     find_extrinsic,
@@ -54,6 +55,7 @@ class Window(QWidget):
     find_extrinsic_btn.clicked.connect(find_extrinsic)
     find_distortion_btn.clicked.connect(find_distortion)
     show_result_btn.clicked.connect(show_result)
+    img_input.textChanged.connect(input_changed)
 
     groupbox = QGroupBox("Calibration")
     v_layout = QVBoxLayout()
